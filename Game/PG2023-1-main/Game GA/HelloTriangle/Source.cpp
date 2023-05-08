@@ -1,5 +1,5 @@
 /*
-TRABALHO GA PROCESSAMENTO GR¡FICO - CHRISTIAN MORAES FAGUNDES
+TRABALHO GA PROCESSAMENTO GR√ÅFICO - CHRISTIAN MORAES FAGUNDES
 */
 
 #include <iostream>
@@ -30,13 +30,13 @@ using namespace std;
 #include <list>
 #include <ctime>
 
-// ProtÛtipo da funÁ„o de callback de teclado
+// Prot√≥tipo da fun√ß√£o de callback de teclado
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 GLuint generateTexture(string filePath, int &width, int &height);
 bool testCollision(Sprite spr1, Sprite* character, GLFWwindow* window);
 
-// Dimensıes da janela (pode ser alterado em tempo de execuÁ„o)
+// Dimens√µes da janela (pode ser alterado em tempo de execu√ß√£o)
 const GLuint WIDTH = 800, HEIGHT = 600;
 
 //Seta o player
@@ -50,27 +50,27 @@ Sprite setEnemy(Shader* shader, GLuint texID);
 list<Sprite*>enemyList;
 int timeToSpawnEnemy = 5;
 
-// FunÁ„o MAIN
+// Fun√ß√£o MAIN
 int main()
 {
-	// InicializaÁ„o da GLFW
+	// Inicializa√ß√£o da GLFW
 	glfwInit();
 
-	// CriaÁ„o da janela GLFW
+	// Cria√ß√£o da janela GLFW
 	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Trabalho GA!", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
-	// Fazendo o registro da funÁ„o de callback para a janela GLFW
+	// Fazendo o registro da fun√ß√£o de callback para a janela GLFW
 	glfwSetKeyCallback(window, key_callback);
 
-	// GLAD: carrega todos os ponteiros d funÁıes da OpenGL
+	// GLAD: carrega todos os ponteiros d fun√ß√µes da OpenGL
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
 
 	}
 
-	// Obtendo as informaÁıes de vers„o
+	// Obtendo as informa√ß√µes de vers√£o
 	const GLubyte* renderer = glGetString(GL_RENDERER); /* get renderer string */
 	const GLubyte* version = glGetString(GL_VERSION); /* version as a string */
 	cout << "Renderer: " << renderer << endl;
@@ -116,14 +116,14 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_ALWAYS);
 
-	//Habilitar a transparÍncia
+	//Habilitar a transpar√™ncia
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	//tempo incial
 	time_t tInicial;
 	time(&tInicial);
-	// Loop da aplicaÁ„o - "game loop"
+	// Loop da aplica√ß√£o - "game loop"
 	while (!glfwWindowShouldClose(window))
 	{
 		//renderizar inimigos com o tempo
@@ -137,11 +137,11 @@ int main()
 			
 		}
 
-		// Checa se houveram eventos de input (key pressed, mouse moved etc.) e chama as funÁıes de callback correspondentes
+		// Checa se houveram eventos de input (key pressed, mouse moved etc.) e chama as fun√ß√µes de callback correspondentes
 		glfwPollEvents();
 		testCollision(character, &character , window);
 				
-		// Definindo as dimensıes da viewport com as mesmas dimensıes da janela da aplicaÁ„o
+		// Definindo as dimens√µes da viewport com as mesmas dimens√µes da janela da aplica√ß√£o
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
 		glViewport(0, 0, width, height);
@@ -163,7 +163,7 @@ int main()
 		}
 		
 		for (Sprite* enemy:enemyList) {
-			//true adiciona rotaÁ„o de 180
+			//true adiciona rota√ß√£o de 180
 			enemy->update(true);
 			if (!enemy->isDestroyed()) {
 				enemy->draw();
@@ -184,13 +184,13 @@ int main()
 		glfwSwapBuffers(window);
 	}
 	
-	// Finaliza a execuÁ„o da GLFW, limpando os recursos alocados por ela
+	// Finaliza a execu√ß√£o da GLFW, limpando os recursos alocados por ela
 	glfwTerminate();
 	return 0;
 }
 
-// FunÁ„o de callback de teclado - sÛ pode ter uma inst‚ncia (deve ser est·tica se
-// estiver dentro de uma classe) - … chamada sempre que uma tecla for pressionada
+// Fun√ß√£o de callback de teclado - s√≥ pode ter uma inst√¢ncia (deve ser est√°tica se
+// estiver dentro de uma classe) - √â chamada sempre que uma tecla for pressionada
 // ou solta via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -235,11 +235,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 GLuint generateTexture(string filePath, int &width, int &height)
 {
 	GLuint texID;
-	// Gera o identificador da textura na memÛria 
+	// Gera o identificador da textura na mem√≥ria 
 	glGenTextures(1, &texID);
 	glBindTexture(GL_TEXTURE_2D, texID);
 
-	//Definindo o mÈtodo de wrapping e de filtering
+	//Definindo o m√©todo de wrapping e de filtering
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
@@ -284,7 +284,7 @@ bool testCollision(Sprite spr1, Sprite* pointspr1, GLFWwindow* window)
 	for (Sprite* enemy : enemyList) {
 		enemy->getAABB(min2, max2);
 
-		//deixar a colis„o mais precisa
+		//deixar a colis√£o mais precisa
 		min1.x += 2.0;
 		min2.x += 2.0;
 		min1.y += 2.0;
@@ -296,6 +296,7 @@ bool testCollision(Sprite spr1, Sprite* pointspr1, GLFWwindow* window)
 			pointspr1->destroy();
 			enemy->destroy();
 			glfwSetWindowShouldClose(window, GL_TRUE);
+			printf("Sua pontuacao foi %d pontos",enemyList.size()*100);
 		}
 
 		if (max2.x < -5 ) {
