@@ -70,6 +70,8 @@ int main()
 
 	}
 
+	srand((unsigned int)time(NULL));
+		
 	// Obtendo as informações de versão
 	const GLubyte* renderer = glGetString(GL_RENDERER); /* get renderer string */
 	const GLubyte* version = glGetString(GL_VERSION); /* version as a string */
@@ -317,7 +319,6 @@ Sprite setEnemy(Shader* shader,GLuint texID){
 
 	texID = generateTexture("../../textures/Spritesheets/enemyShip/Ship4SpriteSheet.png", charwidth, charheight);
 	
-	srand((unsigned int)time(NULL));
 	int yAleatorio = rand() % (500 + 1 - 100) + 100;
 
 	enemy.initialize(texID, charwidth, charheight, 1, 4, 5, 5);
